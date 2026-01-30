@@ -6,7 +6,6 @@ export const formatCurrency = (amount: string | number) => {
   }).format(Number(amount));
 };
 
-// Format date to the specific Figma format: May 15, 2020 10:00 AM
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleString("en-US", {

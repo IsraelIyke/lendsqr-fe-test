@@ -3,14 +3,14 @@
 
 .sidebar {
   position: fixed;
-  top: 100px; // Start below the Topbar
+  top: 100px;
   left: 0;
   padding-top: 40px;
-  width: 283px; // Matches image_b7d83c.png
+  width: 283px;
   height: calc(100vh - 100px);
   background: #ffffff;
   border-right: 1px solid rgba(33, 63, 125, 0.05);
-  overflow-y: auto; // Only the sidebar list scrolls if it's too long
+  overflow-y: auto;
   z-index: 900;
 
   scrollbar-width: thin; /* For Firefox */
@@ -78,14 +78,14 @@
     &.active {
       opacity: 1;
       background: rgba(57, 205, 204, 0.06);
-      border-left: 3px solid #39cdcc; // The marker from image_b7c156.png
+      border-left: 3px solid #39cdcc;
     }
   }
 
   .dashboardLink {
     margin-bottom: 10px;
     .navItem {
-      opacity: 0.6; // In Figma, Dashboard is usually inactive if on Users page
+      opacity: 0.6;
     }
   }
 

@@ -23,13 +23,13 @@
   .title {
     font-size: 32px;
     font-weight: 700;
-    color: #213f7d; // Navy Blue
+    color: #213f7d;
     margin-bottom: 16px;
   }
 
   .description {
     font-size: 16px;
-    color: #545f7d; // Grey-Blue
+    color: #545f7d;
     line-height: 1.6;
     margin-bottom: 32px;
   }
@@ -38,7 +38,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background-color: #39cdcc; // Teal
+    background-color: #39cdcc;
     color: #ffffff;
     padding: 12px 30px;
     border-radius: 8px;
@@ -52,7 +52,7 @@
     }
 
     img {
-      filter: brightness(0) invert(1); // Makes the black back-arrow white
+      filter: brightness(0) invert(1);
     }
   }
 }

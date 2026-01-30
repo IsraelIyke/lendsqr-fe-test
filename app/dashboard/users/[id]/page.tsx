@@ -29,7 +29,7 @@ export default function UserDetails() {
     }
   }, [id]);
 
-  // Graceful Network Error UI
+  // Graceful Error Simple UI
   if (error) {
     return (
       <div className={styles.errorContainer}>

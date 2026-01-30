@@ -25,11 +25,9 @@ export const fetchUsers = async (): Promise<User[]> => {
 
 export const fetchUserById = async (id: string): Promise<User | null> => {
   try {
-    // 1. Check LocalStorage first
     const cachedData = localStorage.getItem(`lendsqr_user_${id}`);
     if (cachedData) return JSON.parse(cachedData);
 
-    // 2. Fallback to fetching all and finding the ID
     const allUsers = await fetchUsers();
     const user = allUsers.find((u: User) => u.id === id);
 

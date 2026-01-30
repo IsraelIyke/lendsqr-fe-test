@@ -11,7 +11,7 @@
   background: #ffffff;
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   display: flex;
-  align-items: center; // Vertical centering for the whole bar
+  align-items: center;
 
   .container {
     display: flex;
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 100px; // Spacing between Logo and Search Bar
+    gap: 100px;
 
     @media (max-width: 1200px) {
       gap: 50px;
@@ -65,7 +65,7 @@
       margin-left: 4.7rem;
 
       @include tablet {
-        display: none; // Match Figma: hide search on tablet/mobile
+        display: none;
       }
 
       input {

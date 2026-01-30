@@ -2,18 +2,12 @@
 
 .mainContent {
   position: relative;
-  /* Use padding to create space for the fixed elements */
-  padding-top: 100px; // Topbar height
-  padding-left: 283px; // Sidebar width from image
-
-  /* Critical Fix: Ensure the container doesn't exceed screen width */
+  padding-top: 100px;
+  padding-left: 283px;
   width: 100%;
   min-height: 100vh;
-  box-sizing: border-box; // Ensures padding doesn't add to the width
-
-  background-color: #fbfbfb; // Dashboard background color
-
-  /* Additional internal spacing for data */
+  box-sizing: border-box;
+  background-color: #fbfbfb;
   padding-right: 0px;
   padding-bottom: 60px;
 
@@ -22,7 +16,7 @@
   }
 
   @media (max-width: 1024px) {
-    padding-left: 0; // If you hide sidebar on smaller screens
+    padding-left: 0;
     padding-right: 20px;
     padding-left: 20px;
   }

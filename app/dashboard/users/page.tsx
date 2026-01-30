@@ -23,24 +23,21 @@ export default function UsersPage() {
       setError(null);
 
       try {
-        // 1. Check LocalStorage first
         const cachedData = localStorage.getItem(LENDSQR_USERS_KEY);
 
         if (cachedData) {
           const parsedData = JSON.parse(cachedData);
           setUsers(parsedData);
           setLoading(false);
-          return; // Exit early if we have data
+          return;
         }
 
-        // 2. If not present, fetch from API
         const data = await fetchUsers();
 
         if (!data || data.length === 0) {
           throw new Error("No data received");
         }
 
-        // 3. Save to LocalStorage for future use
         localStorage.setItem(LENDSQR_USERS_KEY, JSON.stringify(data));
 
         setUsers(data);
@@ -73,7 +70,7 @@ export default function UsersPage() {
           <p>{error}</p>
           <button
             onClick={() => {
-              localStorage.removeItem(LENDSQR_USERS_KEY); // Clear potentially corrupt data on retry
+              localStorage.removeItem(LENDSQR_USERS_KEY);
               window.location.reload();
             }}
             className={styles.retryBtn}
@@ -143,7 +140,7 @@ export default function UsersPage() {
             />
           </button>
 
-          {/* Pagination Logic... */}
+          {/* Pagination Logic */}
           {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map(
             (p) => (
               <button

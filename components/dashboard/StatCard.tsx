@@ -10,7 +10,7 @@ interface StatCardProps {
 
 const config = {
   users: {
-    iconName: "np_users2", // Ensure this matches /public/icons/icon-users.svg
+    iconName: "np_users2",
     className: styles.users,
   },
   active: {
