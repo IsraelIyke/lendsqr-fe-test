@@ -1,0 +1,239 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.tableContainer {
+  background: #ffffff;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 30px;
+  margin-top: 40px;
+  width: 100%;
+  min-height: 50rem;
+
+  box-sizing: border-box;
+  position: relative; // Added to contain the absolute filter popup
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include mobile {
+    padding: 15px;
+  }
+
+  .table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+    min-width: 900px;
+
+    thead {
+      tr th {
+        font-size: 12px;
+        font-weight: 600;
+        color: #545f7d;
+        padding: 15px 10px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        cursor: pointer; // Make header clickable for filter
+
+        .headerContent {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+        &:last-child {
+          border-bottom: none;
+        }
+
+        td {
+          padding: 20px 10px;
+          font-size: 14px;
+          color: #545f7d;
+          white-space: nowrap;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+// --- Filter Popup Styles ---
+.filterPopup {
+  position: absolute;
+  top: 85px; // Positioned below header
+  left: 30px;
+  width: 270px;
+  background: #ffffff;
+  border: 1px solid rgba(84, 95, 125, 0.14);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 30px 20px;
+  z-index: 2000;
+
+  .filterGroup {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-weight: 500;
+      font-size: 14px;
+      color: #545f7d;
+      margin-bottom: 2px;
+    }
+
+    input,
+    select {
+      border: 1px solid #213f7d33;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 14px;
+      color: #213f7d;
+      outline: none;
+      transition: border 0.2s;
+
+      &:focus {
+        border-color: #39cdcc;
+      }
+
+      &::placeholder {
+        color: rgba(84, 95, 125, 0.3);
+      }
+    }
+  }
+
+  .filterActions {
+    display: flex;
+    gap: 14px;
+    margin-top: 30px;
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .resetBtn {
+      background: #fff;
+      border: 1px solid #545f7d;
+      color: #545f7d;
+    }
+
+    .filterBtn {
+      background: #39cdcc;
+      border: 1px solid #39cdcc;
+      color: #fff;
+    }
+  }
+}
+
+// --- Action Cell & Popup ---
+.actionCell {
+  width: 40px;
+  text-align: right;
+}
+
+.actionWrapper {
+  position: relative;
+  display: inline-block;
+
+  .moreIcon {
+    cursor: pointer;
+    color: #545f7d;
+    padding: 5px;
+    border-radius: 50%;
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.actionPopup {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 180px;
+  background: #ffffff;
+  border: 1px solid rgba(84, 95, 125, 0.04);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 10px 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+
+  a,
+  button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #545f7d;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+
+    &:hover {
+      background: #f7f8f9;
+    }
+
+    img {
+      opacity: 0.8;
+    }
+  }
+}
+
+// --- Status Tags ---
+.status {
+  padding: 7px 15px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 400;
+  display: inline-block;
+  text-align: center;
+  min-width: fit-content;
+
+  &.active {
+    background: rgba(57, 205, 98, 0.06);
+    color: #39cd62;
+  }
+  &.inactive {
+    background: rgba(84, 95, 125, 0.06);
+    color: #545f7d;
+  }
+  &.pending {
+    background: rgba(233, 178, 0, 0.1);
+    color: #e9b200;
+  }
+  &.blacklisted {
+    background: rgba(228, 3, 59, 0.1);
+    color: #e4033b;
+  }
+}

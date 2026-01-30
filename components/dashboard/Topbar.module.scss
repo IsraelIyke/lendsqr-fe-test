@@ -1,0 +1,162 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 1000;
+  background: #ffffff;
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center; // Vertical centering for the whole bar
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 59px 0 30px;
+
+    @include tablet {
+      padding: 0 30px;
+    }
+  }
+
+  .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 100px; // Spacing between Logo and Search Bar
+
+    @media (max-width: 1200px) {
+      gap: 50px;
+    }
+
+    .mobileMenuBtn {
+      display: none;
+      background: none;
+      border: none;
+      color: $dark-blue;
+      cursor: pointer;
+      margin-right: 10px;
+
+      @include tablet {
+        display: block;
+      }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      .logoImg {
+        object-fit: contain;
+      }
+    }
+
+    .searchContainer {
+      display: flex;
+      width: 400px;
+      height: 40px;
+      margin-left: 4.7rem;
+
+      @include tablet {
+        display: none; // Match Figma: hide search on tablet/mobile
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid rgba(84, 95, 125, 0.15);
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        padding: 0 20px;
+        font-size: 14px;
+        color: $dark-blue;
+        outline: none;
+
+        &::placeholder {
+          color: rgba(84, 95, 125, 0.7);
+        }
+      }
+
+      .searchBtn {
+        width: 56px;
+        background: $primary-cyan;
+        border: none;
+        border-radius: 0 8px 8px 0;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include tablet {
+      gap: 20px;
+    }
+
+    .docs {
+      color: $dark-blue;
+      text-decoration: underline;
+      font-size: 16px;
+      font-weight: 400;
+
+      @include tablet {
+        display: none;
+      }
+    }
+
+    .notificationIcon {
+      color: $dark-blue;
+      cursor: pointer;
+    }
+
+    .userProfile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      .avatarWrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        .avatar {
+          object-fit: cover;
+        }
+      }
+
+      .userName {
+        font-weight: 500;
+        color: $dark-blue;
+        font-size: 16px;
+
+        @include mobile {
+          display: none;
+        }
+      }
+
+      .chevron {
+        color: $dark-blue;
+      }
+    }
+  }
+}
