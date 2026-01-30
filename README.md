@@ -7,6 +7,15 @@ A comprehensive admin dashboard application built for Lendsqr's frontend enginee
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![React](https://img.shields.io/badge/React-19.2.3-61dafb)
 
+## Visual Gallery
+
+| Page | Preview |
+| :--- | :--- |
+| **Login Page** | <img src="https://github.com/user-attachments/assets/3dc7b2be-9bc1-4b76-b11c-b472f8990272" width="400" /> |
+| **Users Dashboard** | <img src="https://github.com/user-attachments/assets/bbdfb2a6-e7cf-430d-9817-1d4c80ca4494" width="400" /> |
+| **User Details** | <img src="https://github.com/user-attachments/assets/a60b638d-13c7-4d01-9109-67a52ef411b9" width="400" /> |
+| **Mobile Responsiveness** | <img src="https://github.com/user-attachments/assets/e65cd078-bd58-450c-aa67-545e706c604f" width="200" /> |
+
 ## Project Overview
 
 This application is a recreation of Lendsqr's admin console, featuring user management capabilities with data visualization, filtering, and detailed user profiles. The implementation focuses on visual fidelity, code quality, and responsive design.
@@ -304,13 +313,13 @@ NEXT_PUBLIC_API_KEY=your_api_key
 
 - Required by assessment criteria
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/IsraelIyke/lendsqr-fe-test/blob/main/LICENSE) file for details.
 
-## 👤 Author
+## Author
 
-**Your Name**
+**Nwangwu Israel Ikechukwu**
 
 - GitHub: [@IsraelIyke](https://github.com/IsraelIyke)
 - Email: nwangwuisrael@gmail.com
