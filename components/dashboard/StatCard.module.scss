@@ -1,0 +1,62 @@
+@use "@/styles/variables" as *;
+
+.card {
+  background: #fff;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  border-radius: 4px;
+
+  // Flex logic to stay in one row
+  flex: 1;
+  min-width: 180px; // Minimum size before it triggers container scroll
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1440px) {
+    padding: 15px;
+    min-width: 160px;
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    &.users {
+      background: rgba(223, 24, 255, 0.1);
+    }
+    &.active {
+      background: rgba(87, 24, 255, 0.1);
+    }
+    &.loans {
+      background: rgba(245, 95, 68, 0.1);
+    }
+    &.savings {
+      background: rgba(255, 51, 102, 0.1);
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-color;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    white-space: nowrap; // Prevents text overlapping icons
+  }
+
+  .count {
+    font-size: 24px;
+    font-weight: 700;
+    color: $dark-blue;
+
+    @media (max-width: 1200px) {
+      font-size: 20px;
+    }
+  }
+}
