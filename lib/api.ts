@@ -2,8 +2,8 @@ import axios from "axios";
 import { User } from "@/types/user";
 
 // Accessing environment variables
-const API_DATA_URL = process.env.NEXT_PUBLIC_JSON_GENERATOR_URL;
-const ACCESS_TOKEN = process.env.NEXT_PUBLIC_JSON_GENERATOR_TOKEN;
+const API_DATA_URL = process.env.JSON_GENERATOR_URL;
+const ACCESS_TOKEN = process.env.JSON_GENERATOR_TOKEN;
 
 const api = axios.create({
   headers: {
