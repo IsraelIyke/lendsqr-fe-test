@@ -1,0 +1,153 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: $font-main; // Ensure Work Sans is applied
+
+  // Left Side: Illustration & Logo
+  .leftPane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0 0 60px;
+    background-color: #ffffff;
+
+    @include tablet {
+      display: none;
+    }
+
+    .logo {
+      margin-bottom: 80px;
+    }
+
+    .heroWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 60px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  // Right Side: Form
+  .rightPane {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
+
+    .form {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      padding: 0 40px;
+
+      h1 {
+        font-size: 40px;
+        font-weight: 700;
+        color: $dark-blue;
+        margin-bottom: 10px;
+        letter-spacing: -0.04em;
+      }
+
+      p {
+        font-size: 20px;
+        color: $text-color;
+        margin-bottom: 40px;
+      }
+
+      .inputGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        width: 100%;
+
+        // Shared input styles
+        input {
+          width: 100%;
+          padding: 15px;
+          border: 2px solid rgba(84, 95, 125, 0.15);
+          border-radius: 5px;
+          font-family: inherit;
+          font-size: 14px;
+          outline: none;
+          box-sizing: border-box; // Critical for width: 100%
+
+          &:focus {
+            border-color: $primary-cyan;
+          }
+
+          &::placeholder {
+            color: rgba(84, 95, 125, 0.5);
+          }
+        }
+
+        .passwordField {
+          position: relative;
+          width: 100%;
+
+          input {
+            padding-right: 65px; // Space for the SHOW/HIDE text
+          }
+
+          span {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $primary-cyan;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            user-select: none; // Prevents highlighting text on click
+            transition: opacity 0.2s;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+
+        .forgot {
+          font-size: 12px;
+          font-weight: 600;
+          color: $primary-cyan;
+          cursor: pointer;
+          margin-top: 5px;
+          text-transform: uppercase;
+          width: fit-content;
+        }
+      }
+
+      .submitBtn {
+        width: 100%;
+        margin-top: 30px;
+        padding: 15px;
+        background-color: $primary-cyan;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        font-family: inherit;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+}

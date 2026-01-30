@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --font-work-sans: "Work Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-work-sans);
+}
+
+* {
+  /* Firefox Support */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(33, 63, 125, 0.2) transparent;
+
+  /* Webkit Browsers (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 8px; /* Vertical scrollbar width */
+    height: 8px; /* Horizontal scrollbar height (for tables) */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(33, 63, 125, 0.2);
+    border-radius: 10px;
+
+    /* Creates a "floating" effect by adding space around the thumb */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+
+    &:hover {
+      background: rgba(33, 63, 125, 0.4);
+      /* Keeps the border on hover to maintain the floating look */
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+  }
+}
