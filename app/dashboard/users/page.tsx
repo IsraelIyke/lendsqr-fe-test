@@ -7,27 +7,52 @@ import StatCard from "@/components/dashboard/StatCard";
 import UserTable from "@/components/users/UserTable";
 import styles from "./users.module.scss";
 
+// Constant for the storage key
+const LENDSQR_USERS_KEY = "lendsqr_users_data";
+
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // Added error state
+  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    const loadUsers = async () => {
+      setLoading(true);
+      setError(null);
 
-    fetchUsers()
-      .then((data) => {
-        if (!data) throw new Error("No data received");
+      try {
+        // 1. Check LocalStorage first
+        const cachedData = localStorage.getItem(LENDSQR_USERS_KEY);
+
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          setUsers(parsedData);
+          setLoading(false);
+          return; // Exit early if we have data
+        }
+
+        // 2. If not present, fetch from API
+        const data = await fetchUsers();
+
+        if (!data || data.length === 0) {
+          throw new Error("No data received");
+        }
+
+        // 3. Save to LocalStorage for future use
+        localStorage.setItem(LENDSQR_USERS_KEY, JSON.stringify(data));
+
         setUsers(data);
+      } catch (err) {
+        console.error("Data loading error:", err);
+        setError("Unable to load user records. Please check your connection.");
+      } finally {
         setLoading(false);
-      })
-      .catch(() => {
-        setError("Unable to fetch users.");
-        setLoading(false);
-      });
+      }
+    };
+
+    loadUsers();
   }, []);
 
   const currentItems = useMemo(() => {
@@ -38,7 +63,8 @@ export default function UsersPage() {
 
   const totalPages = Math.ceil(users.length / itemsPerPage);
 
-  // 1. Graceful Error State
+  // --- UI Renders (Error & Loading) ---
+
   if (error) {
     return (
       <div className={styles.errorContainer}>
@@ -46,7 +72,10 @@ export default function UsersPage() {
           <Image src="/icons/warning.svg" alt="Error" width={40} height={40} />
           <p>{error}</p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              localStorage.removeItem(LENDSQR_USERS_KEY); // Clear potentially corrupt data on retry
+              window.location.reload();
+            }}
             className={styles.retryBtn}
           >
             Retry Connection
@@ -65,12 +94,13 @@ export default function UsersPage() {
     );
   }
 
+  // --- Main Table Render ---
   return (
     <div className={styles.usersWrapper}>
       <h1>Users</h1>
 
       <div className={styles.statsGrid}>
-        <StatCard title="USERS" count="500" type="users" />
+        <StatCard title="USERS" count={users.length.toString()} type="users" />
         <StatCard title="ACTIVE USERS" count="453" type="active" />
         <StatCard title="USERS WITH LOANS" count="153" type="loans" />
         <StatCard title="USERS WITH SAVINGS" count="53" type="savings" />
@@ -100,7 +130,6 @@ export default function UsersPage() {
         </div>
 
         <div className={styles.pages}>
-          {/* 2. Swapped Lucide for SVG Arrows */}
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -114,6 +143,7 @@ export default function UsersPage() {
             />
           </button>
 
+          {/* Pagination Logic... */}
           {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map(
             (p) => (
               <button
