@@ -1,0 +1,22 @@
+// Brand Colors
+$primary-cyan: #39cdcc;
+$dark-blue: #213f7d;
+$text-color: #545f7d;
+$border-color: rgba(33, 63, 125, 0.1);
+
+$font-main: var(--font-work-sans), sans-serif;
+
+// Status Colors
+$status-active-text: #39cd62;
+$status-active-bg: rgba(57, 205, 98, 0.06);
+$status-inactive-text: #545f7d;
+$status-inactive-bg: rgba(84, 95, 125, 0.1);
+$status-pending-text: #e9b200;
+$status-pending-bg: rgba(233, 178, 0, 0.1);
+$status-blacklisted-text: #e4033b;
+$status-blacklisted-bg: rgba(228, 3, 59, 0.1);
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
