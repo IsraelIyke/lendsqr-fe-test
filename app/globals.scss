@@ -15,8 +15,8 @@ body {
 
   /* Webkit Browsers (Chrome, Safari, Edge) */
   &::-webkit-scrollbar {
-    width: 8px; /* Vertical scrollbar width */
-    height: 8px; /* Horizontal scrollbar height (for tables) */
+    width: 8px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
@@ -27,13 +27,11 @@ body {
     background: rgba(33, 63, 125, 0.2);
     border-radius: 10px;
 
-    /* Creates a "floating" effect by adding space around the thumb */
     border: 2px solid transparent;
     background-clip: padding-box;
 
     &:hover {
       background: rgba(33, 63, 125, 0.4);
-      /* Keeps the border on hover to maintain the floating look */
       border: 2px solid transparent;
       background-clip: padding-box;
     }

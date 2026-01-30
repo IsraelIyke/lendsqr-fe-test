@@ -12,8 +12,7 @@
   min-height: 50rem;
 
   box-sizing: border-box;
-  position: relative; // Added to contain the absolute filter popup
-
+  position: relative;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -35,7 +34,7 @@
         padding: 15px 10px;
         text-transform: uppercase;
         white-space: nowrap;
-        cursor: pointer; // Make header clickable for filter
+        cursor: pointer;
 
         .headerContent {
           display: flex;
@@ -72,7 +71,7 @@
 // --- Filter Popup Styles ---
 .filterPopup {
   position: absolute;
-  top: 85px; // Positioned below header
+  top: 85px;
   left: 30px;
   width: 270px;
   background: #ffffff;

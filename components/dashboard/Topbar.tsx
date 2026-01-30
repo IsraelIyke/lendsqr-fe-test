@@ -38,7 +38,6 @@ export default function Topbar() {
             Docs
           </a>
 
-          {/* Custom Notification SVG */}
           <div className={styles.notificationWrapper}>
             <Image
               src="/assets/notification.svg"
@@ -60,7 +59,6 @@ export default function Topbar() {
             </div>
             <span className={styles.userName}>Adedeji</span>
 
-            {/* Custom Chevron SVG */}
             <Image
               src="/assets/dropdown.svg"
               alt="Dropdown"

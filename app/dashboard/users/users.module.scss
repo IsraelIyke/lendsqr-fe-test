@@ -193,7 +193,7 @@
           justify-content: center;
           width: 24px;
           height: 24px;
-          padding: 0; // Ensure SVG centers correctly
+          padding: 0;
 
           &:disabled {
             opacity: 0.3;
@@ -201,7 +201,6 @@
           }
 
           img {
-            // Adjust SVG brightness for arrows if necessary
             display: block;
           }
         }

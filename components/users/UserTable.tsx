@@ -13,7 +13,6 @@ export default function UserTable({ data }: Props) {
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const [showFilter, setShowFilter] = useState(false);
 
-  // 1. Filter State
   const [filters, setFilters] = useState({
     organization: "",
     username: "",
@@ -23,7 +22,6 @@ export default function UserTable({ data }: Props) {
     status: "",
   });
 
-  // 2. Applied Filters State (what actually triggers the table update)
   const [appliedFilters, setAppliedFilters] = useState(filters);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +43,6 @@ export default function UserTable({ data }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 3. Logic to extract unique organizations and statuses for the dropdowns
   const organizations = useMemo(
     () => Array.from(new Set(data.map((u) => u.orgName))),
     [data],
@@ -55,7 +52,6 @@ export default function UserTable({ data }: Props) {
     [data],
   );
 
-  // 4. Filtering Logic
   const filteredData = useMemo(() => {
     return data.filter((user) => {
       return (

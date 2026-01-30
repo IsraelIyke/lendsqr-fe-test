@@ -8,7 +8,6 @@ import { ChevronDown } from "lucide-react";
 import styles from "./Sidebar.module.scss";
 import { useRouter } from "next/navigation";
 
-// Helper component for your Figma SVGs
 const Icon = ({ name }: { name: string }) => (
   <Image
     src={`/assets/${name}.svg`}
@@ -85,7 +84,6 @@ export default function Sidebar() {
   const router = useRouter();
   return (
     <aside className={styles.sidebar}>
-      {/* 1. Switch Organization */}
       <div
         className={styles.switchOrg}
         onClick={() => setIsOrgOpen(!isOrgOpen)}
@@ -104,7 +102,6 @@ export default function Sidebar() {
         </div>
       )}
 
-      {/* 2. Dashboard Link */}
       <div className={styles.dashboardLink}>
         <Link
           href="#"
@@ -114,13 +111,11 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      {/* 3. Categorized Menu */}
       <div className={styles.menuContainer}>
         {menuItems.map((section) => (
           <div key={section.title} className={styles.section}>
             <p className={styles.label}>{section.title}</p>
             {section.items.map((item) => {
-              // Ensure we check if path is not # before showing active state
               const isActive =
                 item.path !== "#" && pathname.startsWith(item.path);
 
@@ -138,7 +133,7 @@ export default function Sidebar() {
         ))}
       </div>
 
-      {/* 4. Logout & Footer */}
+      {/* Logout & Footer */}
       <div className={styles.logoutSection}>
         <button
           className={styles.logoutBtn}
