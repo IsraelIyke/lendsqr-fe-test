@@ -1,20 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { Search, Menu } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import styles from "./Topbar.module.scss";
 import Link from "next/link";
 
-export default function Topbar() {
+interface TopbarProps {
+  onToggleSidebar: () => void;
+  isSidebarOpen: boolean;
+}
+
+export default function Topbar({
+  onToggleSidebar,
+  isSidebarOpen,
+}: TopbarProps) {
   return (
     <header className={styles.topbar}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <button className={styles.mobileMenuBtn}>
-            <Menu size={24} />
+          <button
+            className={styles.mobileMenuBtn}
+            onClick={onToggleSidebar}
+            aria-label="Toggle Menu"
+          >
+            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          <Link href="/" className={styles.logo}>
+          <Link href="/dashboard" className={styles.logo}>
             <Image
               src="/assets/logo2.png"
               alt="Lendsqr"
@@ -34,9 +46,9 @@ export default function Topbar() {
         </div>
 
         <div className={styles.right}>
-          <a href="#" className={styles.docs}>
+          <Link href="#" className={styles.docs}>
             Docs
-          </a>
+          </Link>
 
           <div className={styles.notificationWrapper}>
             <Image

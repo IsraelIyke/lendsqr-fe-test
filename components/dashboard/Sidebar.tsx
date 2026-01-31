@@ -8,6 +8,11 @@ import { ChevronDown } from "lucide-react";
 import styles from "./Sidebar.module.scss";
 import { useRouter } from "next/navigation";
 
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 const Icon = ({ name }: { name: string }) => (
   <Image
     src={`/assets/${name}.svg`}
@@ -25,11 +30,7 @@ const menuItems = [
       { name: "Users", icon: <Icon name="users" />, path: "/dashboard/users" },
       { name: "Guarantors", icon: <Icon name="guarantor" />, path: "#" },
       { name: "Loans", icon: <Icon name="loans" />, path: "#" },
-      {
-        name: "Decision Models",
-        icon: <Icon name="models" />,
-        path: "#",
-      },
+      { name: "Decision Models", icon: <Icon name="models" />, path: "#" },
       { name: "Savings", icon: <Icon name="piggy-bank" />, path: "#" },
       { name: "Loan Requests", icon: <Icon name="loan" />, path: "#" },
       { name: "Whitelist", icon: <Icon name="whitelist" />, path: "#" },
@@ -41,23 +42,11 @@ const menuItems = [
     items: [
       { name: "Organization", icon: <Icon name="organization" />, path: "#" },
       { name: "Loan Products", icon: <Icon name="loan" />, path: "#" },
-      {
-        name: "Savings Products",
-        icon: <Icon name="savings" />,
-        path: "#",
-      },
-      {
-        name: "Fees and Charges",
-        icon: <Icon name="charges" />,
-        path: "#",
-      },
+      { name: "Savings Products", icon: <Icon name="savings" />, path: "#" },
+      { name: "Fees and Charges", icon: <Icon name="charges" />, path: "#" },
       { name: "Transactions", icon: <Icon name="transactions" />, path: "#" },
       { name: "Services", icon: <Icon name="services" />, path: "#" },
-      {
-        name: "Service Account",
-        icon: <Icon name="service" />,
-        path: "#",
-      },
+      { name: "Service Account", icon: <Icon name="service" />, path: "#" },
       { name: "Settlements", icon: <Icon name="settlements" />, path: "#" },
       { name: "Reports", icon: <Icon name="reports" />, path: "#" },
     ],
@@ -66,24 +55,26 @@ const menuItems = [
     title: "SETTINGS",
     items: [
       { name: "Preferences", icon: <Icon name="preferences" />, path: "#" },
-      {
-        name: "Fees and Pricing",
-        icon: <Icon name="fees" />,
-        path: "#",
-      },
+      { name: "Fees and Pricing", icon: <Icon name="fees" />, path: "#" },
       { name: "Audit Logs", icon: <Icon name="audit" />, path: "#" },
       { name: "Systems Messages", icon: <Icon name="system" />, path: "#" },
     ],
   },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isOrgOpen, setIsOrgOpen] = useState(false);
-
   const router = useRouter();
+
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 768) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${isOpen ? styles.isOpen : ""}`}>
       <div
         className={styles.switchOrg}
         onClick={() => setIsOrgOpen(!isOrgOpen)}
@@ -104,7 +95,8 @@ export default function Sidebar() {
 
       <div className={styles.dashboardLink}>
         <Link
-          href="#"
+          href="/dashboard"
+          onClick={handleLinkClick}
           className={`${styles.navItem} ${pathname === "/dashboard" ? styles.active : ""}`}
         >
           <Icon name="dashboard" /> <span>Dashboard</span>
@@ -123,6 +115,7 @@ export default function Sidebar() {
                 <Link
                   key={item.name}
                   href={item.path}
+                  onClick={handleLinkClick}
                   className={`${styles.navItem} ${isActive ? styles.active : ""}`}
                 >
                   {item.icon} <span>{item.name}</span>
@@ -133,11 +126,13 @@ export default function Sidebar() {
         ))}
       </div>
 
-      {/* Logout & Footer */}
       <div className={styles.logoutSection}>
         <button
           className={styles.logoutBtn}
-          onClick={() => router.push("/login")}
+          onClick={() => {
+            handleLinkClick();
+            router.push("/login");
+          }}
         >
           <Icon name="logout" /> <span>Logout</span>
         </button>

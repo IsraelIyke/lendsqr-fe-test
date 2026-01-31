@@ -1,23 +1,34 @@
+"use client";
+
+import { useState } from "react";
 import Topbar from "@/components/dashboard/Topbar";
 import Sidebar from "@/components/dashboard/Sidebar";
 import styles from "./layout.module.scss";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Lendsqr Test App Dashboard",
-  description: "A test application for Lendsqr built with React.js",
-};
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
     <div className={styles.layoutContainer}>
-      <Topbar />
-      <Sidebar />
-      <main className={styles.mainContent}>{children}</main>
+      {/* Pass both the function AND the state to Topbar */}
+      <Topbar onToggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+
+      <div className={styles.contentWrapper}>
+        <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+
+        {isSidebarOpen && (
+          <div className={styles.overlay} onClick={closeSidebar} />
+        )}
+
+        <main className={styles.mainContent}>{children}</main>
+      </div>
     </div>
   );
 }

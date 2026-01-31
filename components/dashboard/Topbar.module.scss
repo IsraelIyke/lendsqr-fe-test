@@ -22,30 +22,35 @@
     padding: 0 59px 0 30px;
 
     @include tablet {
-      padding: 0 30px;
+      padding: 0 20px;
     }
   }
 
   .left {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     gap: 100px;
+    position: relative;
 
     @media (max-width: 1200px) {
-      gap: 50px;
+      gap: 20px;
     }
 
     .mobileMenuBtn {
       display: none;
-      background: none;
+      background: transparent;
       border: none;
       color: $dark-blue;
       cursor: pointer;
-      margin-right: 10px;
+      padding: 5px;
+      z-index: 1100;
+      position: relative;
+      pointer-events: all;
 
       @include tablet {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -62,7 +67,7 @@
       display: flex;
       width: 400px;
       height: 40px;
-      margin-left: 4.7rem;
+      margin-left: 20px;
 
       @include tablet {
         display: none;
@@ -93,7 +98,6 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: background 0.2s;
 
         &:hover {
           opacity: 0.9;
@@ -108,23 +112,23 @@
     gap: 30px;
 
     @include tablet {
-      gap: 20px;
+      gap: 15px;
     }
 
     .docs {
       color: $dark-blue;
       text-decoration: underline;
       font-size: 16px;
-      font-weight: 400;
 
       @include tablet {
         display: none;
       }
     }
 
-    .notificationIcon {
-      color: $dark-blue;
+    .notificationWrapper {
       cursor: pointer;
+      display: flex;
+      align-items: center;
     }
 
     .userProfile {
@@ -152,10 +156,6 @@
         @include mobile {
           display: none;
         }
-      }
-
-      .chevron {
-        color: $dark-blue;
       }
     }
   }
