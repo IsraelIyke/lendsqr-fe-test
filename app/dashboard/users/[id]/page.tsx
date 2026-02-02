@@ -1,16 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { fetchUserById } from "@/lib/api";
 import { User } from "@/types/user";
 import { formatCurrency } from "@/lib/utils";
 import styles from "./UserDetails.module.scss";
 import Image from "next/image";
 import EmptyState from "@/components/dashboard/EmptyState";
+import Link from "next/link";
 
 export default function UserDetails() {
   const { id } = useParams();
-  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("General Details");
@@ -77,10 +77,10 @@ export default function UserDetails() {
 
   return (
     <div className={styles.wrapper}>
-      <button onClick={() => router.back()} className={styles.backBtn}>
+      <Link href="/dashboard/users" className={styles.backBtn}>
         <Image src="/assets/np_back.svg" alt="back" width={25} height={25} />
         <span>Back to Users</span>
-      </button>
+      </Link>
 
       <div className={styles.header}>
         <h2>User Details</h2>
