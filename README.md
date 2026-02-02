@@ -220,7 +220,7 @@ $background: #fbfbfb;
 $white: #ffffff;
 ```
 
-## 📊 API Integration
+## API Integration
 
 ### Mock API
 
@@ -250,7 +250,7 @@ interface User {
 - **User List Cache**: Stored for faster subsequent loads
 - **User Details**: Cached individually with timestamp
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 ### Integration Tests
 
@@ -276,7 +276,7 @@ interface User {
 - **Constants**: UPPER_SNAKE_CASE (e.g., `API_BASE_URL`)
 - **CSS Classes**: kebab-case (e.g., `user-table-row`)
 
-## 🚢 Deployment
+## Deployment
 
 ### Vercel Deployment (Recommended)
 
@@ -300,7 +300,7 @@ NEXT_PUBLIC_API_URL=your_api_url
 NEXT_PUBLIC_API_KEY=your_api_key
 ```
 
-## 📝 Project Decisions & Rationale
+## Project Decisions & Rationale
 
 ### Why Next.js?
 
@@ -332,7 +332,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 **Note**: This is a technical assessment project for Lendsqr. The code is for evaluation purposes and is not used in production systems.
 
-## 📋 Assessment Checklist
+## Assessment Checklist
 
 - [x] Login page implementation
 - [x] Dashboard with statistics
