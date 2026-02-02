@@ -7,7 +7,6 @@ import StatCard from "@/components/dashboard/StatCard";
 import UserTable from "@/components/users/UserTable";
 import styles from "./users.module.scss";
 
-// Constant for the storage key
 const LENDSQR_USERS_KEY = "lendsqr_users_data";
 
 export default function UsersPage() {
@@ -21,36 +20,27 @@ export default function UsersPage() {
     const loadUsers = async () => {
       setLoading(true);
       setError(null);
-
       try {
         const cachedData = localStorage.getItem(LENDSQR_USERS_KEY);
-
         if (cachedData) {
-          const parsedData = JSON.parse(cachedData);
-          setUsers(parsedData);
+          setUsers(JSON.parse(cachedData));
           setLoading(false);
           return;
         }
-
         const data = await fetchUsers();
-
-        if (!data || data.length === 0) {
-          throw new Error("No data received");
-        }
-
+        if (!data || data.length === 0) throw new Error("No data received");
         localStorage.setItem(LENDSQR_USERS_KEY, JSON.stringify(data));
-
         setUsers(data);
       } catch (err) {
-        console.error("Data loading error:", err);
         setError("Unable to load user records. Please check your connection.");
       } finally {
         setLoading(false);
       }
     };
-
     loadUsers();
   }, []);
+
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
   const currentItems = useMemo(() => {
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -58,21 +48,46 @@ export default function UsersPage() {
     return users.slice(indexOfFirstItem, indexOfLastItem);
   }, [users, currentPage, itemsPerPage]);
 
-  const totalPages = Math.ceil(users.length / itemsPerPage);
+  // Logic to determine which page numbers to show
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisible = 3;
 
-  // --- UI Renders (Error & Loading) ---
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+    } else {
+      // Always show page 1
+      pageNumbers.push(1);
+
+      if (currentPage > 3) pageNumbers.push("...");
+
+      // Show neighbors of current page
+      let start = Math.max(2, currentPage - 1);
+      let end = Math.min(totalPages - 1, currentPage + 1);
+
+      // Adjust if at the beginning or end
+      if (currentPage <= 2) end = 4;
+      if (currentPage >= totalPages - 1) start = totalPages - 3;
+
+      for (let i = start; i <= end; i++) {
+        if (!pageNumbers.includes(i)) pageNumbers.push(i);
+      }
+
+      if (currentPage < totalPages - 2) pageNumbers.push("...");
+
+      // Always show last page
+      if (!pageNumbers.includes(totalPages)) pageNumbers.push(totalPages);
+    }
+    return pageNumbers;
+  };
 
   if (error) {
     return (
       <div className={styles.errorContainer}>
         <div className={styles.errorContent}>
-          <Image src="/icons/warning.svg" alt="Error" width={40} height={40} />
           <p>{error}</p>
           <button
-            onClick={() => {
-              localStorage.removeItem(LENDSQR_USERS_KEY);
-              window.location.reload();
-            }}
+            onClick={() => window.location.reload()}
             className={styles.retryBtn}
           >
             Retry Connection
@@ -91,7 +106,6 @@ export default function UsersPage() {
     );
   }
 
-  // --- Main Table Render ---
   return (
     <div className={styles.usersWrapper}>
       <h1>Users</h1>
@@ -103,9 +117,7 @@ export default function UsersPage() {
         <StatCard title="USERS WITH SAVINGS" count="53" type="savings" />
       </div>
 
-      <div>
-        <UserTable data={currentItems} />
-      </div>
+      <UserTable data={currentItems} />
 
       <div className={styles.paginationContainer}>
         <div className={styles.showingText}>
@@ -129,7 +141,7 @@ export default function UsersPage() {
         <div className={styles.pages}>
           <button
             disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            onClick={() => setCurrentPage((p) => p - 1)}
             className={styles.arrow}
           >
             <Image
@@ -140,32 +152,25 @@ export default function UsersPage() {
             />
           </button>
 
-          {/* Pagination Logic */}
-          {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map(
-            (p) => (
+          {getPageNumbers().map((p, index) =>
+            p === "..." ? (
+              <span key={`dots-${index}`} className={styles.dots}>
+                ...
+              </span>
+            ) : (
               <button
                 key={p}
                 className={currentPage === p ? styles.activePage : ""}
-                onClick={() => setCurrentPage(p)}
+                onClick={() => setCurrentPage(Number(p))}
               >
                 {p}
               </button>
             ),
           )}
 
-          {totalPages > 3 && <span className={styles.dots}>...</span>}
-          {totalPages > 3 && (
-            <button
-              className={currentPage === totalPages ? styles.activePage : ""}
-              onClick={() => setCurrentPage(totalPages)}
-            >
-              {totalPages}
-            </button>
-          )}
-
           <button
             disabled={currentPage === totalPages || totalPages === 0}
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            onClick={() => setCurrentPage((p) => p + 1)}
             className={styles.arrow}
           >
             <Image
