@@ -92,18 +92,21 @@ export default function UserDetails() {
 
       <div className={styles.topCard}>
         <div className={styles.mainInfo}>
-          <div className={styles.avatarWrapper}>
-            <Image
-              src="/assets/avatar2.png"
-              alt="User Avatar"
-              width={64}
-              height={64}
-            />
+          <div className={styles.userInfo}>
+            <div className={styles.avatarWrapper}>
+              <Image
+                src="/assets/avatar2.png"
+                alt="User Avatar"
+                width={64}
+                height={64}
+              />
+            </div>
+            <div className={styles.nameSection}>
+              <h3>{`${user.profile.firstName} ${user.profile.lastName}`}</h3>
+              <p>{user.id.substring(0, 10)}</p>
+            </div>
           </div>
-          <div className={styles.nameSection}>
-            <h3>{`${user.profile.firstName} ${user.profile.lastName}`}</h3>
-            <p>{user.id.substring(0, 10)}</p>
-          </div>
+
           <div className={styles.verticalDivider} />
           <div className={styles.tierSection}>
             <p>User's Tier</p>
