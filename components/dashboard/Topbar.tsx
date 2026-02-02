@@ -26,7 +26,7 @@ export default function Topbar({
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          <Link href="/dashboard" className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             <Image
               src="/assets/logo2.png"
               alt="Lendsqr"
